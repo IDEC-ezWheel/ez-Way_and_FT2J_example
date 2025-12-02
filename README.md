@@ -45,10 +45,10 @@ On this example a LED tower with buzzer will be used to visualize some states of
 ## Prerequisites
 
 * An ez-Wheel robot with ez-Way - in our case a Starter Kit
-* PLC - IDEC FT2J: https://us.idec.com/idec-us/en/USD/Operator-Interfaces/PLC%2BHMI/FT2J-7inch-PLC%2BHMI/c/FT2J_Series?page=1 
-* Light tower with buzzer - IDEC LD6A: https://us.idec.com/idec-us/en/USD/Indicator-Lights-%26-Buzzers/Light-Towers/LD6A-Series/c/LD6A_Series?page=1 
-* WindLDR & WindOI softwares: https://us.idec.com/Software/WindLDR-PLC-Software/c/WindLDR?page=1
-* Wi-Fi Dongle - Make sure it is compatible with your PLC reference
+* [PLC - IDEC FT2J](https://us.idec.com/idec-us/en/USD/Operator-Interfaces/PLC%2BHMI/FT2J-7inch-PLC%2BHMI/c/FT2J_Series?page=1)
+* [Light tower with buzzer - IDEC LD6A](https://us.idec.com/idec-us/en/USD/Indicator-Lights-%26-Buzzers/Light-Towers/LD6A-Series/c/LD6A_Series?page=1)
+* [WindLDR & WindOI softwares](https://us.idec.com/Software/WindLDR-PLC-Software/c/WindLDR?page=1)
+* Wi-Fi Dongle - make sure it is compatible with your PLC reference
 * RJ45 Ethernet Cable (for wired MQTT communication)
 
 This example is implemented on an ez-Way Starter Kit, with an FT2J-7U22SAF-B (PLC with HMI from IDEC), and an LD6A light tower (5 colored LEDs and 2 buzzers). The outputs Q0 to Q5 of the FT2J will be wired to the 5 LEDs and one of the buzzers of the LD6A.
@@ -93,7 +93,7 @@ Note that some FT2J may have sink outputs and other voltage requirements.
 
 ## 3 - FT2J Interface
 
-For information about the FT2J Interface of this example, please refer to the "FT2J Interface" section of the [Workshop_StarterKit_ez-Way_(FT2J)](https://github.com/EYezWheel/ez-Way_and_FT2J_example/blob/dev/Workshop_StarterKit_ez-Way_(FT2J).pdf) document you can find in this repository.
+For information about the FT2J Interface of this example, please refer to the "FT2J Interface" section of the [Workshop_StarterKit_ez-Way_(FT2J)](https://github.com/IDEC-ezWheel/ez-Way_and_FT2J_example/blob/main/Workshop_StarterKit_ez-Way_(FT2J).pdf) document you can find in this repository.
 
 To read this PDF, it is recommended to use an other editor than the one provided by GitHub
 
@@ -238,9 +238,7 @@ Finally, the program and configuration can be downloaded on the FT2J by selectin
 
 This section of this document will focus on the explanation of the code of this specific example. This is not a manual explaining how to program on the FT2J.
 
-If documentation is needed on how to program on the FT2J, please refer to the manuals available on the FT2J page in the IDEC website:
-
-https://eu.idec.com/idec-eu/en_EU/Automation/Operator-Interfaces/PLC%2BHMI/FT2J-Controller-with-Operator-Interface/c/FT2J_Series?page=1
+If documentation is needed on how to program on the FT2J, please refer to the manuals available on the [FT2J Controller with Operator Interface](https://eu.idec.com/idec-eu/en_EU/Automation/Operator-Interfaces/PLC%2BHMI/FT2J-Controller-with-Operator-Interface/c/FT2J_Series?page=1) page in the IDEC website:
 
 ### 5.1 - Organization of the Memory
 
