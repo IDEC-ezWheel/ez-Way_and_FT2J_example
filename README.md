@@ -44,11 +44,11 @@ On this example a LED tower with buzzer will be used to visualize some states of
 
 ## Prerequisites
 
-* An ez-Wheel robot with ez-Way - in our case a Starter Kit
-* PLC - IDEC FT2J: https://us.idec.com/idec-us/en/USD/Operator-Interfaces/PLC%2BHMI/FT2J-7inch-PLC%2BHMI/c/FT2J_Series?page=1 
-* Light tower with buzzer - IDEC LD6A: https://us.idec.com/idec-us/en/USD/Indicator-Lights-%26-Buzzers/Light-Towers/LD6A-Series/c/LD6A_Series?page=1 
-* WindLDR & WindOI softwares: https://us.idec.com/Software/WindLDR-PLC-Software/c/WindLDR?page=1
-* Wi-Fi Dongle - Make sure it is compatible with your PLC reference
+* An ez-Wheel robot with [ez-Way](https://www.ez-wheel.com/en/ez-way-software) **1.3 or higher** - in our case a Starter Kit
+* [PLC - IDEC FT2J](https://us.idec.com/idec-us/en/USD/Operator-Interfaces/PLC%2BHMI/FT2J-7inch-PLC%2BHMI/c/FT2J_Series?page=1)
+* [Light tower with buzzer - IDEC LD6A](https://us.idec.com/idec-us/en/USD/Indicator-Lights-%26-Buzzers/Light-Towers/LD6A-Series/c/LD6A_Series?page=1)
+* [WindLDR & WindOI softwares](https://us.idec.com/Software/WindLDR-PLC-Software/c/WindLDR?page=1)
+* Wi-Fi Dongle - make sure it is compatible with your PLC reference
 * RJ45 Ethernet Cable (for wired MQTT communication)
 
 This example is implemented on an ez-Way Starter Kit, with an FT2J-7U22SAF-B (PLC with HMI from IDEC), and an LD6A light tower (5 colored LEDs and 2 buzzers). The outputs Q0 to Q5 of the FT2J will be wired to the 5 LEDs and one of the buzzers of the LD6A.
@@ -93,7 +93,7 @@ Note that some FT2J may have sink outputs and other voltage requirements.
 
 ## 3 - FT2J Interface
 
-For information about the FT2J Interface of this example, please refer to the "FT2J Interface" section of the [Workshop_StarterKit_ez-Way_(FT2J)](https://github.com/EYezWheel/ez-Way_and_FT2J_example/blob/dev/Workshop_StarterKit_ez-Way_(FT2J).pdf) document you can find in this repository.
+For information about the FT2J Interface of this example, please refer to the "FT2J Interface" section of the [Workshop_StarterKit_ez-Way_(FT2J)](https://github.com/IDEC-ezWheel/ez-Way_and_FT2J_example/blob/main/Workshop_StarterKit_ez-Way_(FT2J).pdf) document you can find in this repository.
 
 To read this PDF, it is recommended to use an other editor than the one provided by GitHub
 
@@ -238,9 +238,7 @@ Finally, the program and configuration can be downloaded on the FT2J by selectin
 
 This section of this document will focus on the explanation of the code of this specific example. This is not a manual explaining how to program on the FT2J.
 
-If documentation is needed on how to program on the FT2J, please refer to the manuals available on the FT2J page in the IDEC website:
-
-https://eu.idec.com/idec-eu/en_EU/Automation/Operator-Interfaces/PLC%2BHMI/FT2J-Controller-with-Operator-Interface/c/FT2J_Series?page=1
+If documentation is needed on how to program on the FT2J, please refer to the manuals available on the [FT2J Controller with Operator Interface](https://eu.idec.com/idec-eu/en_EU/Automation/Operator-Interfaces/PLC%2BHMI/FT2J-Controller-with-Operator-Interface/c/FT2J_Series?page=1) page in the IDEC website:
 
 ### 5.1 - Organization of the Memory
 
@@ -282,7 +280,7 @@ Data register (LDR):
 * [LDR 02000] – [LDR 03999]: related to the corresponding subscribed MQTT topic
   * [LDR 02000] – [LDR 02099]: "uagv/v2/ez-Wheel /client id/visualization" [M 2000]
   * [LDR 02100] – [LDR 02199]: "uagv/v2/ez-Wheel/client id/state" [M 2100]
-  * [LDR 02200] – [LDR 02299]: "uagv/v2/ez-Wheel/local/state" [M 2200]
+  * [LDR 02200] – [LDR 02299]: "amr_manager/state" [M 2200]
   * [LDR 02300] – [LDR 02399]: "error_manager/state" [M 2300]
   * [LDR 02400] – [LDR 02499]: "standalone_manager/state" [M 2400]
   * [LDR 02500] – [LDR 02599]: "standalone_manager/result"[M 2500]
@@ -295,7 +293,7 @@ Internal Relay (LM):
 * [LM 02000] – [LM 03999]: related to the corresponding subscribed MQTT topic
   * [LM 02000] – [LM 02099]: "uagv/v2/ez-Wheel /client id/visualization" [M 2000]
   * [LM 02100] – [LM 02199]: "uagv/v2/ez-Wheel/client id/state" [M 2100]
-  * [LM 02200] – [LM 02299]: "uagv/v2/ez-Wheel/local/state" [M 2200]
+  * [LM 02200] – [LM 02299]: "amr_manager/state" [M 2200]
   * [LM 02300] – [LM 02399]: "error_manager/state" [M 2300]
   * [LM 02400] – [LM 02499]: "standalone_manager/state" [M 2400]
   * [LM 02500] – [LM 02599]: "standalone_manager/result"[M 2500]
@@ -313,12 +311,11 @@ For clarity, the MQTT messages will be referred to, using the corresponding "Pub
     alt="Publish messages on MQTT Settings" 
     style="width: 500px; height: auto;">
 
-MQTT Messages on a topic starting with "uagv/v2/ez-Wheel"
+MQTT Messages on a topic starting with "uagv/v2/ez-Wheel/client_id"
 
-* [M 1000]: "client_id/order " "Go to Point" order, used to move the robot from the Loading Area to Kitting Stations (A, B, C) and coming back
-* [M 1010]: "local/instantActions" with 1 parameter, used to change the mode of the robot (MANUAL or AUTOMATIC)
-* [M 1020]: "client_id/instantActions" with no parameters, used to send the "Cancel Order" and "State Request" messages.
-* [M 1030]: "client_id/instantActions" with 1 parameter, used to send the "Select Navigation" message
+* [M 1000]: In the topic "order", used in the "Go to Point" Orders to move the robot from the Loading Area to Kitting Stations (A, B, C) and coming back
+* [M 1020]: In the topic "instantActions" with no parameters, used to send the "Cancel Order" and "State Request" messages
+* [M 1030]: In the topic "instantActions" with 1 parameter, used to send the "Select Navigation" message
 
 MQTT Messages on the topic "error_manager/request"
 
@@ -329,8 +326,12 @@ MQTT Messages on the topic "standalone_manager/request"
 * [M 1200]: Save a specific mission on ez-Way. Before starting an ez-Way mission, it needs to be saved, then applied
 * [M 1210]: Apply the previously saved mission on ez-Way. Now the mission is loaded and ready to be started
 * [M 1220]: Initialize and start the loaded mission. This sequence of 3 messages ([M 1200], [M 1210], [M 1220]) is used to start the "ez-Way Missions"
-* [M 1230]: Init Pose, used to set the robot's position values (X, Y, Theta). Used before the "Go to Point" mission
-* [M 1240]: Set Value of the standalone manager, used to send the "Pause", "Resume" and "Stop" messages.
+* [M 1230]: Init Pose. used before the "Go to Point" Orders to set the robot's position values (X, Y, Theta)
+* [M 1240]: Set Value of the standalone manager. Used to send the "Pause", "Resume" and "Stop" messages
+
+MQTT Messages on the topic "amr_manager/request"
+
+* [M 1300]: Change the Operating Mode of the robot (MANUAL or AUTOMATIC)
 
 #### 5.2.2 - Subscribe
 
@@ -343,7 +344,10 @@ MQTT topics starting with "uagv/v2/ez-Wheel"
 
 * [M 2000]: "client_id/visualization", used to retrieve the robot's position (X, Y, Theta)
 * [M 2100]: "client_id/state", used to retrieve the robot's battery state (charge and voltage), and its safety state (Estop and field violation)
-* [M 2200]: "local/state", used to retrieve the robot's operating mode
+
+MQTT topics starting with "amr_manager"
+
+* [M 2200]: "amr_manager/state", used to retrieve the robot's operating mode
 
 MQTT topics starting with "error_manager"
 
@@ -459,11 +463,11 @@ Explanation of some registers used in the script:
 
 5.3.7 - Script 7: Check AUTOMATIC Mode
 
-This script checks if the robot's operating mode is "AUTOMATIC" by comparing a string received in the "uagv/v2/ez-Wheel/local/state" topic [M 2200] to a constant string.
+This script checks if the robot's operating mode is "AUTOMATIC" by comparing a string received in the "amr_manager/state" topic [M 2200] to a constant string.
 
 Explanation of some registers used in the script:
 
-* [LDR 02200] string indicating the robot's operating mode. Updated by the subscribed MQTT topic "uagv/v2/ez-Wheel/local/state" [M 2200]
+* [LDR 02200] string indicating the robot's operating mode. Updated by the subscribed MQTT topic "amr_manager/state" [M 2200]
 * [D 3270] constant string containing "AUTOMATIC"
 * [LM 2200] indicates if the robot's operating mode is "AUTOMATIC". Used in the HMI
 
