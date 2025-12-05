@@ -311,12 +311,11 @@ For clarity, the MQTT messages will be referred to, using the corresponding "Pub
     alt="Publish messages on MQTT Settings" 
     style="width: 500px; height: auto;">
 
-MQTT Messages on a topic starting with "uagv/v2/ez-Wheel"
+MQTT Messages on a topic starting with "uagv/v2/ez-Wheel/client_id"
 
-* [M 1000]: "client_id/order " "Go to Point" order, used to move the robot from the Loading Area to Kitting Stations (A, B, C) and coming back
-* [M 1010]: "local/instantActions" with 1 parameter, used to change the mode of the robot (MANUAL or AUTOMATIC)
-* [M 1020]: "client_id/instantActions" with no parameters, used to send the "Cancel Order" and "State Request" messages.
-* [M 1030]: "client_id/instantActions" with 1 parameter, used to send the "Select Navigation" message
+* [M 1000]: In the topic "order", used in the "Go to Point" Orders to move the robot from the Loading Area to Kitting Stations (A, B, C) and coming back
+* [M 1020]: In the topic "instantActions" with no parameters, used to send the "Cancel Order" and "State Request" messages
+* [M 1030]: In the topic "instantActions" with 1 parameter, used to send the "Select Navigation" message
 
 MQTT Messages on the topic "error_manager/request"
 
@@ -327,8 +326,12 @@ MQTT Messages on the topic "standalone_manager/request"
 * [M 1200]: Save a specific mission on ez-Way. Before starting an ez-Way mission, it needs to be saved, then applied
 * [M 1210]: Apply the previously saved mission on ez-Way. Now the mission is loaded and ready to be started
 * [M 1220]: Initialize and start the loaded mission. This sequence of 3 messages ([M 1200], [M 1210], [M 1220]) is used to start the "ez-Way Missions"
-* [M 1230]: Init Pose, used to set the robot's position values (X, Y, Theta). Used before the "Go to Point" mission
-* [M 1240]: Set Value of the standalone manager, used to send the "Pause", "Resume" and "Stop" messages.
+* [M 1230]: Init Pose. used before the "Go to Point" Orders to set the robot's position values (X, Y, Theta)
+* [M 1240]: Set Value of the standalone manager. Used to send the "Pause", "Resume" and "Stop" messages
+
+MQTT Messages on the topic "amr_manager/request"
+
+* [M 1300]: Change the Operating Mode of the robot (MANUAL or AUTOMATIC)
 
 #### 5.2.2 - Subscribe
 
