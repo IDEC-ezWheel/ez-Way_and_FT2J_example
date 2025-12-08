@@ -44,7 +44,7 @@ On this example a LED tower with buzzer will be used to visualize some states of
 
 ## Prerequisites
 
-* An ez-Wheel robot with ez-Way - in our case a Starter Kit
+* An ez-Wheel robot with ez-Way **1.3 or higher** - in our case a Starter Kit
 * [PLC - IDEC FT2J](https://us.idec.com/idec-us/en/USD/Operator-Interfaces/PLC%2BHMI/FT2J-7inch-PLC%2BHMI/c/FT2J_Series?page=1)
 * [Light tower with buzzer - IDEC LD6A](https://us.idec.com/idec-us/en/USD/Indicator-Lights-%26-Buzzers/Light-Towers/LD6A-Series/c/LD6A_Series?page=1)
 * [WindLDR & WindOI softwares](https://us.idec.com/Software/WindLDR-PLC-Software/c/WindLDR?page=1)
