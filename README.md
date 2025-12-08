@@ -280,7 +280,7 @@ Data register (LDR):
 * [LDR 02000] – [LDR 03999]: related to the corresponding subscribed MQTT topic
   * [LDR 02000] – [LDR 02099]: "uagv/v2/ez-Wheel /client id/visualization" [M 2000]
   * [LDR 02100] – [LDR 02199]: "uagv/v2/ez-Wheel/client id/state" [M 2100]
-  * [LDR 02200] – [LDR 02299]: "uagv/v2/ez-Wheel/local/state" [M 2200]
+  * [LDR 02200] – [LDR 02299]: "amr_manager/state" [M 2200]
   * [LDR 02300] – [LDR 02399]: "error_manager/state" [M 2300]
   * [LDR 02400] – [LDR 02499]: "standalone_manager/state" [M 2400]
   * [LDR 02500] – [LDR 02599]: "standalone_manager/result"[M 2500]
@@ -293,7 +293,7 @@ Internal Relay (LM):
 * [LM 02000] – [LM 03999]: related to the corresponding subscribed MQTT topic
   * [LM 02000] – [LM 02099]: "uagv/v2/ez-Wheel /client id/visualization" [M 2000]
   * [LM 02100] – [LM 02199]: "uagv/v2/ez-Wheel/client id/state" [M 2100]
-  * [LM 02200] – [LM 02299]: "uagv/v2/ez-Wheel/local/state" [M 2200]
+  * [LM 02200] – [LM 02299]: "amr_manager/state" [M 2200]
   * [LM 02300] – [LM 02399]: "error_manager/state" [M 2300]
   * [LM 02400] – [LM 02499]: "standalone_manager/state" [M 2400]
   * [LM 02500] – [LM 02599]: "standalone_manager/result"[M 2500]
@@ -344,7 +344,10 @@ MQTT topics starting with "uagv/v2/ez-Wheel"
 
 * [M 2000]: "client_id/visualization", used to retrieve the robot's position (X, Y, Theta)
 * [M 2100]: "client_id/state", used to retrieve the robot's battery state (charge and voltage), and its safety state (Estop and field violation)
-* [M 2200]: "local/state", used to retrieve the robot's operating mode
+
+MQTT topics starting with "amr_manager"
+
+* [M 2200]: "amr_manager/state", used to retrieve the robot's operating mode
 
 MQTT topics starting with "error_manager"
 
@@ -460,11 +463,11 @@ Explanation of some registers used in the script:
 
 5.3.7 - Script 7: Check AUTOMATIC Mode
 
-This script checks if the robot's operating mode is "AUTOMATIC" by comparing a string received in the "uagv/v2/ez-Wheel/local/state" topic [M 2200] to a constant string.
+This script checks if the robot's operating mode is "AUTOMATIC" by comparing a string received in the "amr_manager/state" topic [M 2200] to a constant string.
 
 Explanation of some registers used in the script:
 
-* [LDR 02200] string indicating the robot's operating mode. Updated by the subscribed MQTT topic "uagv/v2/ez-Wheel/local/state" [M 2200]
+* [LDR 02200] string indicating the robot's operating mode. Updated by the subscribed MQTT topic "amr_manager/state" [M 2200]
 * [D 3270] constant string containing "AUTOMATIC"
 * [LM 2200] indicates if the robot's operating mode is "AUTOMATIC". Used in the HMI
 
