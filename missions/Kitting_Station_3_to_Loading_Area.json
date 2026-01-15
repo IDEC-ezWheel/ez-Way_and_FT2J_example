@@ -1,0 +1,86 @@
+{
+    "id": "Kitting_Station_3_to_Loading_Area",
+    "description": "",
+    "navigation_id": "NAV2",
+    "controller_id": "FollowPath",
+    "planner_id": "StraightLine",
+    "map_id": "Map_Workshop_FT2J",
+    "nodes": [
+        {
+            "node_id": "1",
+            "node_sequence_id": 0,
+            "node_type": "NONE",
+            "node_code": null,
+            "node_description": "",
+            "node_actions": [],
+            "node_position": {
+                "x": 3.0,
+                "y": -1.5,
+                "theta": -3.14,
+                "mapId": "",
+                "allowedDeviationXY": 0.5,
+                "allowedDeviationTheta": 1.5
+            },
+            "edge_mode": "STRAIGHT",
+            "edge_length": null,
+            "edge_max_speed": 0.5,
+            "edge_orientation": 0.0,
+            "edge_description": "",
+            "edge_actions": [],
+            "edge_trajectory": null
+        },
+        {
+            "node_id": "2",
+            "node_sequence_id": 2,
+            "node_type": "NONE",
+            "node_code": null,
+            "node_description": "",
+            "node_actions": [],
+            "node_position": {
+                "x": 1.0,
+                "y": -1.5,
+                "theta": 2.14,
+                "mapId": "",
+                "allowedDeviationXY": 0.5,
+                "allowedDeviationTheta": 1.5
+            },
+            "edge_mode": "STRAIGHT",
+            "edge_length": null,
+            "edge_max_speed": 0.5,
+            "edge_orientation": 3.14,
+            "edge_description": "",
+            "edge_actions": [],
+            "edge_trajectory": null
+        },
+        {
+            "node_id": "3",
+            "node_sequence_id": 4,
+            "node_type": "NONE",
+            "node_code": null,
+            "node_description": "",
+            "node_actions": [],
+            "node_position": {
+                "x": 0.0,
+                "y": -0.0,
+                "theta": 0.0,
+                "mapId": "",
+                "allowedDeviationXY": 0.5,
+                "allowedDeviationTheta": 1.5
+            },
+            "edge_mode": "STRAIGHT",
+            "edge_length": null,
+            "edge_max_speed": 0.5,
+            "edge_orientation": 0.0,
+            "edge_description": "",
+            "edge_actions": [],
+            "edge_trajectory": null
+        }
+    ],
+    "guard_zones": [],
+    "metadata": {
+        "version": "1.0",
+        "uid": "2ce47d425a9e48f288256402c65ae1e6",
+        "creation_time": "2025-10-31T08:57:17.518768Z",
+        "modification_time": "2025-10-31T14:58:01.033759Z"
+    }
+}
