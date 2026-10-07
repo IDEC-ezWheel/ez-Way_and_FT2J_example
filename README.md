@@ -2,35 +2,39 @@
 
 ## Table of contents
 
-- [Table of contents](#table-of-contents)
-- [Introduction](#introduction)
-- [Prerequisites](#prerequisites)
-- [1 - Wiring](#1---wiring)
-- [2 - Network Configuration](#2---network-configuration)
-- [3 - FT2J Interface](#3---ft2j-interface)
-- [4 - Configuring the FT2J](#4---configuring-the-ft2j)
-  - [4.1 - Ethernet Communication](#41---ethernet-communication)
-  - [4.2 - Wi-Fi Communication](#42---wi-fi-communication)
-  - [4.3 - MQTT Communication](#43---mqtt-communication)
-  - [4.4 - Downloading a program or a configuration](#44---downloading-a-program-or-a-configuration)
-- [5 - Explanation of the code](#5---explanation-of-the-code)
-  - [5.1 - Organization of the Memory](#51---organization-of-the-memory)
-    - [5.1.1 - Control device](#511---control-device)
-    - [5.1.2 - HMI device](#512---hmi-device)
-  - [5.2 - MQTT Messages](#52---mqtt-messages)
-    - [5.2.1 - Publish](#521---publish)
-    - [5.2.2 - Subscribe](#522---subscribe)
-  - [5.3 - Global Scripts](#53---global-scripts)
-    - [5.3.1 - Script 1: Check Estop](#531---script-1-check-estop)
-    - [5.3.2 - Script 2: I/O Manager](#532---script-2-io-manager)
-    - [5.3.3 - Script 3: Update Error Values](#533---script-3-update-error-values)
-    - [5.3.4 - Script 4: Check Standalone Manager Result Success](#534---script-4-check-standalone-manager-result-success)
-    - [5.3.5 - Script 5: Create Order ID \& Header ID](#535---script-5-create-order-id--header-id)
-    - [5.3.6 - Script 6: Is robot Driving](#536---script-6-is-robot-driving)
-  - [5.4 - LADDER Code](#54---ladder-code)
-    - [5.4.1 - Main Program](#541---main-program)
-    - [5.4.2 - Macro 0: Publish to MQTT Broker](#542---macro-0-publish-to-mqtt-broker)
-    - [5.4.3 - Macro 1: Subscribe to MQTT Broker](#543---macro-1-subscribe-to-mqtt-broker)
+- [Documentation - MQTT ez-Way on FT2J](#documentation---mqtt-ez-way-on-ft2j)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Prerequisites](#prerequisites)
+  - [1 - Wiring](#1---wiring)
+  - [2 - Network Configuration](#2---network-configuration)
+  - [3 - FT2J Interface](#3---ft2j-interface)
+  - [4 - Configuring the FT2J](#4---configuring-the-ft2j)
+    - [4.1 - Ethernet Communication](#41---ethernet-communication)
+    - [4.2 - Wi-Fi Communication](#42---wi-fi-communication)
+    - [4.3 - MQTT Communication](#43---mqtt-communication)
+      - [4.3.1 - Configuring the IP address and port](#431---configuring-the-ip-address-and-port)
+      - [4.3.2 - Configuring the Client ID (MAC address)](#432---configuring-the-client-id-mac-address)
+      - [4.3.3 "Connection Control" and "Connection Status"](#433-connection-control-and-connection-status)
+    - [4.4 - Downloading a program or a configuration](#44---downloading-a-program-or-a-configuration)
+  - [5 - Explanation of the code](#5---explanation-of-the-code)
+    - [5.1 - Organization of the Memory](#51---organization-of-the-memory)
+      - [5.1.1 - Control device](#511---control-device)
+      - [5.1.2 - HMI device](#512---hmi-device)
+    - [5.2 - MQTT Messages](#52---mqtt-messages)
+      - [5.2.1 - Publish](#521---publish)
+      - [5.2.2 - Subscribe](#522---subscribe)
+    - [5.3 - Global Scripts](#53---global-scripts)
+      - [5.3.1 - Script 1: Check Estop](#531---script-1-check-estop)
+      - [5.3.2 - Script 2: I/O Manager](#532---script-2-io-manager)
+      - [5.3.3 - Script 3: Update Error Values](#533---script-3-update-error-values)
+      - [5.3.4 - Script 4: Check Standalone Manager Result Success](#534---script-4-check-standalone-manager-result-success)
+      - [5.3.5 - Script 5: Create Order ID \& Header ID](#535---script-5-create-order-id--header-id)
+      - [5.3.6 - Script 6: Is robot Driving](#536---script-6-is-robot-driving)
+    - [5.4 - LADDER Code](#54---ladder-code)
+      - [5.4.1 - Main Program](#541---main-program)
+      - [5.4.2 - Macro 0: Publish to MQTT Broker](#542---macro-0-publish-to-mqtt-broker)
+      - [5.4.3 - Macro 1: Subscribe to MQTT Broker](#543---macro-1-subscribe-to-mqtt-broker)
 
 ## Introduction
 
@@ -155,18 +159,10 @@ On the "MQTT Settings" panel, there are 3 pages:
 
 The "Publish" and "Subscribe" panels will be explained in the [Explanation of the code / MQTT Messages](#52---mqtt-messages) section of this document.
 
-On the MQTT Settings page, the following fields can be configured:
-* The IP and Port of the MQTT Broker
-* The "Client ID", a unique ID for each ez-Wheel robot and used in the MQTT topics names. In this example, it will be stored in the "Data Register" D 3140.
-* The "Connection Control" and "Connection Status", used in the LADDER program to control and have feedback on the connection's status to the MQTT Broker. They will be stored respectively in the "Internal Relay" M 0000 and the "Data Register" D 0000.
-
-<span style="color:rgb(251, 44, 54)">
-
-For **wireless** MQTT communication the IP address must be set to "10.42.0.1".
-
-For **wired** MQTT communication with Ethernet cable, the IP address must be set to "10.1.0.2".
-
-</span>
+#### 4.3.1 - Configuring the IP address and port
+* For **wireless** MQTT communication the IP address must be set to "10.42.0.1".
+* For **wired** MQTT communication with Ethernet cable, the IP address must be set to "10.1.0.2".
+* Port **1883** is used by default.
 
 <img src="images/configuring_the_FT2J/MQTT/WindLDR_ProjetcSettings_Network_MQTTSettings_1.png" 
     title="MQTT configuration (1/2)" 
@@ -177,6 +173,78 @@ For **wired** MQTT communication with Ethernet cable, the IP address must be set
     title="MQTT configuration (2/2)" 
     alt="MQTT configuration (2/2)" 
     style="width: 500px; height: auto;">
+
+#### 4.3.2 - Configuring the Client ID (MAC address)
+
+The "Client ID", a unique ID for each ez-Wheel robot and used in the MQTT topics names. In this example, it will be stored in the "Data Register" D 3140.
+
+1. In WindO/I-NV4, click "Control Function Settings" in the project menu on the left. It opens the WindLDR ladder logic page.
+
+    <img src="images/configuring_the_FT2J/MAC_ADDRESS/MAC_ADD_1.png" 
+        title="Open Control Function Settings in WindO/I-NV4" 
+        alt="Open Control Function Settings in WindO/I-NV4" 
+        style="width: 500px; height: auto;">
+
+2. The WindLDR ladder logic page opens.
+
+    <img src="images/configuring_the_FT2J/MAC_ADDRESS/MAC_ADD_2.png" 
+        title="WindLDR ladder logic page" 
+        alt="WindLDR ladder logic page" 
+        style="width: 500px; height: auto;">
+
+3. In WindLDR, press **Ctrl + F**. The "Find String" window opens.
+
+    <img src="images/configuring_the_FT2J/MAC_ADDRESS/MAC_ADD_3.png" 
+        title="Find String window" 
+        alt="Find String window" 
+        style="width: 500px; height: auto;">
+
+4. In "Find", type **D3140** and press **Enter**.
+
+    <img src="images/configuring_the_FT2J/MAC_ADDRESS/MAC_ADD_4.png" 
+        title="Searching for D3140" 
+        alt="Searching for D3140" 
+        style="width: 500px; height: auto;">
+
+5. WindLDR takes you to the rung that uses D3140.
+
+    <img src="images/configuring_the_FT2J/MAC_ADDRESS/MAC_ADD_5.png" 
+        title="Rung using D3140" 
+        alt="Rung using D3140" 
+        style="width: 500px; height: auto;">
+
+6. Double-click the **S1** block. The "MOVC (Store Character)" window opens.
+
+    <img src="images/configuring_the_FT2J/MAC_ADDRESS/MAC_ADD_6.png" 
+        title="MOVC (Store Character) window" 
+        alt="MOVC (Store Character) window" 
+        style="width: 500px; height: auto;">
+
+7. In this window, click "Settings".
+
+    <img src="images/configuring_the_FT2J/MAC_ADDRESS/MAC_ADD_7.png" 
+        title="MOVC settings" 
+        alt="MOVC settings" 
+        style="width: 250px; height: auto;">
+
+8. In "S1 (Input Character String)", replace the highlighted value with the MAC address of your ez-Way. The letters must be in **lower case**.
+
+    <img src="images/configuring_the_FT2J/MAC_ADDRESS/MAC_ADD_8.png" 
+        title="Editing the MAC address in S1" 
+        alt="Editing the MAC address in S1" 
+        style="width: 250px; height: auto;">
+
+    The MAC address of your ez-Way is displayed at the top of the ez-Way Control or ez-Way Config page.
+
+    <img src="images/configuring_the_FT2J/MAC_ADDRESS/MAC_ADD_9.png" 
+        title="Where to find the ez-Way MAC address" 
+        alt="Where to find the ez-Way MAC address" 
+        style="width: 500px; height: auto;">
+
+9. Click **OK**.
+
+#### 4.3.3 "Connection Control" and "Connection Status"
+This is used in the LADDER program to control and have feedback on the connection's status to the MQTT Broker. They will be stored respectively in the "Internal Relay" M 0000 and the "Data Register" D 0000.
 
 ### 4.4 - Downloading a program or a configuration
 
